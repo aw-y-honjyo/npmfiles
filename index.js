@@ -29,6 +29,9 @@ module.exports = function (options){
         options.packageJsonPath = path.join(path.dirname(caller.filePath), options.packageJsonPath);
     }
 
+    for (key in packages.napa) {
+        packages.dependencies[key] = packages.dependencies[key] || packages.napa[key]
+    }
     for (key in packages.dependencies) {
         override = overrides[key] || {};
         keys = keys.concat(getMainFiles(options.nodeModulesPath + "/" + key, override));
